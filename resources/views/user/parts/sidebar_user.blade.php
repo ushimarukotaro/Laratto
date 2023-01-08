@@ -1,6 +1,7 @@
 @section('sidebar')
     <div class="h-screen hidden lg:block shadow-lg relative w-50">
         <div class="bg-amber-100 h-full">
+            <div class="pt-3 pl-3">こんにちは <br>{{ Auth::user()->name }}さん</div>
             <div class="flex items-center justify-start pt-6 ml-8">
                 <p class="font-bold text-xl">
                     Laratto
@@ -113,7 +114,7 @@
                 </div>
                 <div>
                     <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform hover:bg-sky-500 hover:text-white"
-                        href="#">
+                        href="">
                         <span class="text-left">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path
@@ -122,9 +123,15 @@
                                     d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
                             </svg>
                         </span>
-                        <span class="mx-2 text-md font-normal">
-                            ログアウト
-                        </span>
+
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button>
+                                <span class="mx-2 text-md font-normal">
+                                    ログアウト
+                                </span>
+                            </button>
+                        </form>
                     </a>
                 </div>
             </nav>

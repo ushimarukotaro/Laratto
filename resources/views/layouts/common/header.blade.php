@@ -22,16 +22,15 @@
                 {{-- ユーザー新規登録・ログインずみ --}}
                 <button
                     class="inline-flex text-white items-center bg-emerald-500 border-0 py-1 px-3 mx-2 focus:outline-none hover:bg-emerald-400 rounded text-base mt-4 md:mt-0">
-                    <a href="">マイページ</a>
+                    <a href="{{ route('user.index', ['id' => $user_id]) }}">マイページ</a>
                 </button>
                 <form action="{{ route('logout') }}" method="post">
                     @csrf
                     <button
-                    class="inline-flex text-white items-center bg-red-500 border-0 py-1 px-3 mx-2 focus:outline-none hover:bg-red-400 rounded text-base mt-4 md:mt-0">
-                    ログアウト
-                </button>
+                        class="inline-flex text-white items-center bg-red-500 border-0 py-1 px-3 mx-2 focus:outline-none hover:bg-red-400 rounded text-base mt-4 md:mt-0">
+                        ログアウト
+                    </button>
                 </form>
-
             @else
                 {{-- ユーザー新規登録・ログインしていない場合 --}}
                 <button
