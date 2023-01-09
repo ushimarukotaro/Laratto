@@ -3,13 +3,17 @@
 
 @include('user.parts.sidebar_user')
 @section('content')
-    <div class="h-screen overflow-y-scroll">
+    <div class="h-screen overflow-y-scroll bg-neutral-100">
         <div class="px-4 sm:px-4">
             <div class="flex justify-between">
                 <div class="text-2xl font-bold pt-7">投稿</div>
                 <div class="pt-4">
-                    <button
-                        class="bg-blue-500 text-white px-4 py-2 rounded-md text-1xl font-medium hover:bg-blue-700 transition duration-300">新規追加</button>
+                    <a href="{{ route('post.create') }}">
+                        <button
+                            class="bg-blue-500 text-white px-4 py-2 rounded-md text-1xl font-medium hover:bg-blue-700 transition duration-300">
+                            新規追加
+                        </button>
+                    </a>
                 </div>
             </div>
             <div class="py-4">
