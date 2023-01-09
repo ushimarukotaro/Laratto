@@ -3,10 +3,17 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    private $post;
+
+    public function __construct()
+    {
+        $this->post = new Post();
+    }
     /**
      * 投稿リスト
      *
@@ -15,6 +22,8 @@ class PostController extends Controller
      */
     public function index(int $id)
     {
-        return view('user.list.index');
+        // ユーザーIDと一致する投稿データを取得
+        $posts = $this->post->getAllPostsByUserId($id);
+        return view('user.list.index', compact('posts'));
     }
 }

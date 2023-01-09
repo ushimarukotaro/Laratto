@@ -2,6 +2,7 @@
     <x-auth-card>
         <!-- Validation Errors Laravel9.4以降変わったらしい -->
         {{-- <x-auth-validation-errors class="mb-4 text-center" :errors="$errors" /> --}}
+
         {{-- エラーメッセージを一覧で表示する場合はコチラ --}}
         {{-- <x-input-error class="mb-4" :messages="$errors->all()"/> --}}
 

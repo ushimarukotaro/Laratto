@@ -26,7 +26,7 @@
                 </div>
                 <div>
                     <a class="flex items-center px-4 py-2 mt-2 text-gray-600 transition-colors duration-200 transform hover:bg-sky-500 hover:text-white"
-                        href="#">
+                        href="{{ route('user.index', ['id' => Auth::user()->id]) }}">
                         <span class="text-left">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
