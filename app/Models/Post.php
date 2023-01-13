@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 use App\Models\Category;
 use Illuminate\Support\Carbon;
 
@@ -37,6 +38,13 @@ class Post extends Model
     ];
 
     /**
+     * Userモデルとリレーション
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    /**
      * Categoryモデルとリレーション
      */
     public function category()
@@ -45,17 +53,43 @@ class Post extends Model
     }
 
     /**
+     * 投稿データを全て取得し、最新更新日時順にソート。総合トップ画面に表示する記事はステータス「公開」(publish_flg=1)のみ
+     */
+    public function getPostsSortByLatestUpdate()
+    {
+        $result = $this->where('publish_flg', 1)
+            ->orderBy('updated_at', 'DESC')
+            ->with('user')
+            ->with('category')
+            ->get();
+        return $result;
+    }
+
+    /**
+     * カテゴリーごとの記事を全て取得
+     *
+     * @param int $category_id カテゴリーID
+     */
+    public function getPostByCategoryId($category_id)
+    {
+        $result = $this->where('category_id', $category_id)
+            ->get();
+        return $result;
+    }
+
+    /**
      * ユーザーIDに紐づいた投稿リストを全て取得する
      *
      * @param int $user_id ユーザーID
      * @return Post
      */
-    public function getAllPostsByUserId($user_id) {
+    public function getAllPostsByUserId($user_id)
+    {
         $result = $this->where('user_id', $user_id)->with('category')->get();
         return $result;
     }
 
-        /**
+    /**
      * 下書き保存=>publish_flg=0
      * リクエストされたデータをpostsテーブルにinsertする
      *
@@ -121,6 +155,18 @@ class Post extends Model
             'favorite_counter' => 0,
             'delete_flg'       => 0,
         ]);
+        return $result;
+    }
+
+    /**
+     * 投稿IDをもとにpostsテーブルから一意の投稿データを取得
+     *
+     * @param int $post_id 投稿ID
+     * @return object $result App\Models\Post
+     */
+    public function feachPostDateByPostId($post_id)
+    {
+        $result = $this->find($post_id);
         return $result;
     }
 }
