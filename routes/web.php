@@ -38,12 +38,25 @@ Route::get('/article/{post_id}', [TopController::class, 'articleShow'])
 Route::get('/article/category/{category_id}', [TopController::class, 'articleCategory'])
 ->name('top.article.category');
 
+// マイページトップ・投稿
+Route::get('/user/{id}/index', [PostController::class, 'index'])
+    ->name('user.index');
+
 // 新規投稿
 Route::get('/post/create', [PostController::class, 'create'])
     ->name('post.create');
 // 投稿登録処理
 Route::post('/post/store', [PostController::class, 'store'])
     ->name('post.store');
+
 // 投稿詳細
 Route::get('/post/show/{post_id}', [PostController::class, 'show'])
     ->name('post.show');
+
+// 記事更新
+Route::get('/post/edit/{post_id}', [PostController::class, 'edit'])
+->name('post.edit');
+
+// 記事更新
+Route::post('/post/edit/{post_id}', [PostController::class, 'update'])
+    ->name('post.update');
